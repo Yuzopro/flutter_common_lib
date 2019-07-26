@@ -23,7 +23,8 @@ class RefreshScaffold extends StatefulWidget {
       this.itemBuilder,
       this.floatingActionButton,
       this.header,
-      this.offsetBuilder})
+      this.offsetBuilder,
+      this.onReload})
       : super(key: key);
 
   final bool isLoading;
@@ -38,6 +39,7 @@ class RefreshScaffold extends StatefulWidget {
   final Widget floatingActionButton;
   final Widget header;
   final IndexedOffsetBuilder offsetBuilder;
+  final Function onReload;
 
   @override
   State<StatefulWidget> createState() {
@@ -205,24 +207,27 @@ class RefreshScaffoldState extends State<RefreshScaffold>
 
   Widget _buildErrorView() {
     return Offstage(
-      offstage: !widget.isError,
+      offstage: !widget.isError || widget.isLoading,
       child: Center(
         child: SizedBox(
           width: 256.0,
           height: 256.0,
-          child: Column(
-            children: <Widget>[
-              Icon(
-                Icons.network_check,
-                size: 128.0,
-                color: Color(YZColors.subLightTextColor),
-              ),
-              SizedBox(height: 5.0),
-              Text(
-                '网络开小差，检查后再试吧',
-                style: YZConstant.normalSubText,
-              ),
-            ],
+          child: InkWell(
+            child: Column(
+              children: <Widget>[
+                Icon(
+                  Icons.network_check,
+                  size: 128.0,
+                  color: Color(YZColors.subLightTextColor),
+                ),
+                SizedBox(height: 5.0),
+                Text(
+                  '网络开小差，检查后再试吧',
+                  style: YZConstant.normalSubText,
+                ),
+              ],
+            ),
+            onTap: widget.onReload,
           ),
         ),
       ),

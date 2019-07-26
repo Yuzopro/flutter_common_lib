@@ -38,6 +38,8 @@ abstract class BaseBloc<T extends LoadingBean> {
 
   Future getData();
 
+  void onReload();
+
   void onRefresh() async {
     await getData();
     refreshStatusEvent();

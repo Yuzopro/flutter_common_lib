@@ -132,6 +132,9 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
             onLoadMore: () {
               bloc.onLoadMore();
             },
+            onReload: (){
+              bloc.onReload();
+            },
             itemCount: getItemCount(snapshot.data),
             itemBuilder: (BuildContext context, int index) {
               return buildItemBuilder(context, snapshot.data, index);
