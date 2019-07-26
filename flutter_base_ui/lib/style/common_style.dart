@@ -14,16 +14,18 @@ class YZColors {
 
   static const int cardWhite = 0xFFFFFFFF;
   static const int textWhite = 0xFFFFFFFF;
-  static const int miWhite = 0xffececec;
+  static const int miWhite = 0xFFF4F5F6;
   static const int white = 0xFFFFFFFF;
   static const int actionBlue = 0xff267aff;
-  static const int subTextColor = 0xff959595;
   static const int subLightTextColor = 0xffc4c4c4;
 
   static const int mainBackgroundColor = miWhite;
 
-  static const int mainTextColor = primaryDarkValue;
+  static const int mainTextColor = 0xFF081530;
+  static const int subTextColor = 0xFF8C939F;
   static const int textColorWhite = white;
+
+  static const int redPointColor = 0xFFED5E4B;
 }
 
 class YZConstant {
@@ -34,8 +36,8 @@ class YZConstant {
   static const smallTextSize = 14.0;
   static const minTextSize = 12.0;
 
-  static const minText = TextStyle(
-    color: Color(YZColors.subLightTextColor),
+  static const minSubText = TextStyle(
+    color: Color(YZColors.subTextColor),
     fontSize: minTextSize,
   );
 

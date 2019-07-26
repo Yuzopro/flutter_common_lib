@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_ui/flutter_base_ui.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -20,6 +21,8 @@ class WebViewPage extends StatefulWidget {
 }
 
 class _WebViewState extends State<WebViewPage> {
+  bool _isLoading = true;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -27,6 +30,7 @@ class _WebViewState extends State<WebViewPage> {
         appBar: widget.onWillPop != null
             ? null
             : AppBar(
+                centerTitle: true,
                 title: Text(
                   widget.title,
                   maxLines: 1,
@@ -57,7 +61,7 @@ class _WebViewState extends State<WebViewPage> {
                                   width: 5.0,
                                 ),
                                 Text(
-                                  '浏览器打开',
+                                  '系统浏览器打开',
                                   style: YZConstant.middleText,
                                 )
                               ],
@@ -69,10 +73,11 @@ class _WebViewState extends State<WebViewPage> {
                   ),
                 ],
               ),
-        body: WebView(
-          onWebViewCreated: (WebViewController webViewController) {},
-          initialUrl: widget.url,
-          javascriptMode: JavascriptMode.unrestricted,
+        body: Stack(
+          children: <Widget>[
+            _buildWebView(),
+            _buildLoading(),
+          ],
         ),
       ),
       onWillPop: () {
@@ -82,6 +87,36 @@ class _WebViewState extends State<WebViewPage> {
         } else {
           return Future.value(true);
         }
+      },
+    );
+  }
+
+  Widget _buildLoading() {
+    return Offstage(
+      offstage: !_isLoading,
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: Colors.black54,
+        child: Center(
+          child: SpinKitCircle(
+            color: Theme.of(context).primaryColor,
+            size: 25.0,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWebView() {
+    return WebView(
+      onWebViewCreated: (WebViewController webViewController) {},
+      initialUrl: widget.url,
+      javascriptMode: JavascriptMode.unrestricted,
+      onPageFinished: (url) {
+        setState(() {
+          _isLoading = false;
+        });
       },
     );
   }

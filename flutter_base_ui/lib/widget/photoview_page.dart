@@ -14,6 +14,7 @@ class PhotoViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text(
             title,
             style: YZConstant.normalTextWhite,
@@ -28,7 +29,7 @@ class PhotoViewPage extends StatelessWidget {
                 children: <Widget>[
                   Center(
                       child: ImageUtil.getImage(
-                          'image/ic_default_head.png', 180.0, 180.0)),
+                          'assets/images/ic_default_head.png', 180.0, 180.0)),
                   Center(
                     child: SpinKitCircle(color: Colors.white30, size: 25.0),
                   ),

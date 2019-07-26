@@ -53,6 +53,7 @@ abstract class BaseState<T extends StatefulWidget, P extends BasePresenter<V>,
       appBar: title.isEmpty
           ? null
           : AppBar(
+              centerTitle: true,
               actions: getActions(),
               title: Text(
                 title,

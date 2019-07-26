@@ -5,6 +5,7 @@ import 'package:flutter_base_ui/bloc/loading_bean.dart';
 import 'package:flutter_base_ui/bloc/page_type.dart';
 import 'package:flutter_base_ui/bloc/refresh_scaffold.dart';
 import 'package:flutter_base_ui/style/common_style.dart';
+import 'package:open_git/util/common_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
@@ -55,6 +56,26 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
     return null;
   }
 
+  bool isShowSideBar() {
+    return false;
+  }
+
+  double getOffset(BuildContext context, String letter) {
+    return 0;
+  }
+
+  void _onPopSelected(BuildContext context, String value) {
+    switch (value) {
+      case "browser":
+        openWebView(context);
+        break;
+      default:
+        break;
+    }
+  }
+
+  void openWebView(BuildContext context) {}
+
   @override
   Widget build(BuildContext context) {
     B bloc = BlocProvider.of<B>(context);
@@ -62,13 +83,8 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
 
     return Scaffold(
       appBar: isShowAppBar()
-          ? AppBar(
-              elevation: 0,
-              title: Text(
-                getTitle(context),
-                style: YZConstant.normalTextWhite,
-              ),
-            )
+          ? CommonUtil.getAppBar(getTitle(context),
+              actions: _getAction(context))
           : null,
       body: _buildBody(context, bloc),
     );
@@ -106,6 +122,7 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
 //              tag: TAG);
           return RefreshScaffold(
             isLoading: isLoading(snapshot.data),
+            isError: snapshot.data != null ? snapshot.data.isError : false,
             controller: controller,
             enablePullDown: enablePullDown(),
             enablePullUp: enablePullUp(),
@@ -121,8 +138,52 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
             },
             floatingActionButton: buildFloatingActionButton(context),
             header: getHeader(context, snapshot.data),
+            offsetBuilder: isShowSideBar()
+                ? (context, letter) {
+                    return getOffset(context, letter);
+                  }
+                : null,
             child: getChild(context, snapshot.data),
           );
         });
+  }
+
+  List<Widget> _getAction(BuildContext context) {
+    return [
+      PopupMenuButton(
+        padding: const EdgeInsets.all(0.0),
+        onSelected: (value) {
+          _onPopSelected(context, value);
+        },
+        itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
+          PopupMenuItem<String>(
+            value: "browser",
+            child: ListTile(
+              contentPadding: EdgeInsets.all(0.0),
+              dense: false,
+              title: Container(
+                alignment: Alignment.center,
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.language,
+                      color: Color(YZColors.mainTextColor),
+                      size: 22.0,
+                    ),
+                    SizedBox(
+                      width: 5.0,
+                    ),
+                    Text(
+                      '浏览器打开',
+                      style: YZConstant.middleText,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      )
+    ];
   }
 }

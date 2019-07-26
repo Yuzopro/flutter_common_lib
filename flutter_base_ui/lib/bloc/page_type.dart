@@ -24,4 +24,5 @@ enum PageType {
   reaction, //表情列表
   trending_repos, //趋势项目
   trending_user, //趋势用户
+  trending_language, //趋势语言
 }
