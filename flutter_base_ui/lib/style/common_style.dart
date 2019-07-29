@@ -22,6 +22,7 @@ class YZColors {
   static const int mainBackgroundColor = miWhite;
 
   static const int mainTextColor = 0xFF081530;
+  static const int t65MainTextColor = 0xA6081530;
   static const int subTextColor = 0xFF8C939F;
   static const int textColorWhite = white;
 
@@ -48,6 +49,11 @@ class YZConstant {
 
   static const smallText = TextStyle(
     color: Color(YZColors.mainTextColor),
+    fontSize: smallTextSize,
+  );
+
+  static const smallTextT65 = TextStyle(
+    color: Color(YZColors.t65MainTextColor),
     fontSize: smallTextSize,
   );
 
