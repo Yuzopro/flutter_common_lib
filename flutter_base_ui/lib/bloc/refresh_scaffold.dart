@@ -98,9 +98,7 @@ class RefreshScaffoldState extends State<RefreshScaffold>
   @override
   void dispose() {
     super.dispose();
-    if (widget.controller != null) {
-      widget.controller.dispose();
-    }
+    widget.controller?.dispose();
     _scrollController?.dispose();
   }
 

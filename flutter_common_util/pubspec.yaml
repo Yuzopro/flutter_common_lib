@@ -1,8 +1,8 @@
 name: flutter_common_util
-description: A new Flutter package.
+description: A common Flutter util package.
 version: 0.0.1
-author:
-homepage:
+author: Yuzo
+homepage: https://github.com/Yuzopro
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

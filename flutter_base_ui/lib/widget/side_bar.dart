@@ -37,10 +37,9 @@ const List<String> A_Z_LIST = const [
 class SideBar extends StatefulWidget {
   SideBar({
     Key key,
-    this.data = A_Z_LIST,
     @required this.onTouch,
     this.width = 30,
-    this.itemHeight = 16,
+    this.letterHeight = 16,
     this.color = Colors.transparent,
     this.textStyle = const TextStyle(
       fontSize: 12.0,
@@ -53,11 +52,9 @@ class SideBar extends StatefulWidget {
     ),
   });
 
-  final List<String> data;
-
   final int width;
 
-  final int itemHeight;
+  final int letterHeight;
 
   final Color color;
 
@@ -85,11 +82,9 @@ class _SideBarState extends State<SideBar> {
       color: _isTouchDown ? widget.touchDownColor : widget.color,
       width: widget.width.toDouble(),
       child: _SlideItemBar(
-        data: widget.data,
-        width: widget.width,
-        itemHeight: widget.itemHeight,
-        textStyle: widget.textStyle,
-        touchDownTextStyle: widget.touchDownTextStyle,
+        letterWidth: widget.width,
+        letterHeight: widget.letterHeight,
+        textStyle: _isTouchDown ? widget.touchDownTextStyle : widget.textStyle,
         onTouch: (letter) {
           if (widget.onTouch != null) {
             setState(() {
@@ -104,26 +99,20 @@ class _SideBarState extends State<SideBar> {
 }
 
 class _SlideItemBar extends StatefulWidget {
-  final List<String> data;
+  final int letterWidth;
 
-  final int width;
-
-  final int itemHeight;
+  final int letterHeight;
 
   final TextStyle textStyle;
-
-  final TextStyle touchDownTextStyle;
 
   final OnTouchingLetterChanged onTouch;
 
   _SlideItemBar(
       {Key key,
-      this.data = A_Z_LIST,
       @required this.onTouch,
-      this.width = 30,
-      this.itemHeight = 16,
-      this.textStyle,
-      this.touchDownTextStyle})
+      this.letterWidth = 30,
+      this.letterHeight = 16,
+      this.textStyle})
       : assert(onTouch != null),
         super(key: key);
 
@@ -134,10 +123,9 @@ class _SlideItemBar extends StatefulWidget {
 }
 
 class _SlideItemBarState extends State<_SlideItemBar> {
-  List<int> _letterPositionList = new List();
+  List<int> _letterPositionList = List();
   int _widgetTop = -1;
   int _lastIndex = 0;
-  bool _isTouchDown = false;
 
   @override
   void initState() {
@@ -148,56 +136,53 @@ class _SlideItemBarState extends State<_SlideItemBar> {
   @override
   Widget build(BuildContext context) {
     TextStyle _style = widget.textStyle;
-    if (_isTouchDown == true) {
-      _style = widget.touchDownTextStyle;
-    }
-    _init();
 
-    List<Widget> children = new List();
-    widget.data.forEach((v) {
-      children.add(new SizedBox(
-        width: widget.width.toDouble(),
-        height: widget.itemHeight.toDouble(),
-        child: new Text(v, textAlign: TextAlign.center, style: _style),
+    List<Widget> children = List();
+    A_Z_LIST.forEach((v) {
+      children.add(SizedBox(
+        width: widget.letterWidth.toDouble(),
+        height: widget.letterHeight.toDouble(),
+        child: Text(v, textAlign: TextAlign.center, style: _style),
       ));
     });
 
     return GestureDetector(
       onVerticalDragDown: (DragDownDetails details) {
+        //计算索引列表距离顶部的距离
         if (_widgetTop == -1) {
           RenderBox box = context.findRenderObject();
           Offset topLeftPosition = box.localToGlobal(Offset.zero);
           _widgetTop = topLeftPosition.dy.toInt();
         }
-
+        //获取touch点在索引列表的偏移值
         int offset = details.globalPosition.dy.toInt() - _widgetTop;
         int index = _getIndex(offset);
+        //判断索引是否在列表中，如果存在，则通知上层更新数据
         if (index != -1) {
           _lastIndex = index;
-          _isTouchDown = true;
-          _triggerTouchEvent(widget.data[index]);
+          _triggerTouchEvent(A_Z_LIST[index]);
         }
       },
       onVerticalDragUpdate: (DragUpdateDetails details) {
+        //获取touch点在索引列表的偏移值
         int offset = details.globalPosition.dy.toInt() - _widgetTop;
         int index = _getIndex(offset);
+        //并且前后两次的是否一致，如果不一致，则通知上层更新数据
         if (index != -1 && _lastIndex != index) {
           _lastIndex = index;
-          _isTouchDown = true;
-          _triggerTouchEvent(widget.data[index]);
+          _triggerTouchEvent(A_Z_LIST[index]);
         }
       },
       onVerticalDragEnd: (DragEndDetails details) {
         _lastIndex = -1;
-        _isTouchDown = false;
         _triggerTouchEvent('');
       },
       onTapUp: (TapUpDetails details) {
         _lastIndex = -1;
-        _isTouchDown = false;
         _triggerTouchEvent('');
       },
-      child: new Column(
+      //填充UI
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         children: children,
       ),
@@ -208,8 +193,8 @@ class _SlideItemBarState extends State<_SlideItemBar> {
     _letterPositionList.clear();
     _letterPositionList.add(0);
     int tempHeight = 0;
-    widget.data?.forEach((value) {
-      tempHeight = tempHeight + widget.itemHeight;
+    A_Z_LIST?.forEach((value) {
+      tempHeight = tempHeight + widget.letterHeight;
       _letterPositionList.add(tempHeight);
     });
   }

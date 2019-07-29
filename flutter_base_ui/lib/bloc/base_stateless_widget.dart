@@ -14,62 +14,38 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
 
   PageType getPageType();
 
-  String getTitle(BuildContext context) {
-    return "";
-  }
-
-  bool isShowAppBar() {
-    return true;
-  }
-
-  bool enablePullUp() {
-    return false;
-  }
-
-  bool enablePullDown() {
-    return true;
-  }
-
   bool isLoading(T data);
 
-  Widget buildFloatingActionButton(BuildContext context) {
-    return null;
-  }
+  String getTitle(BuildContext context) => '';
 
-  Widget getHeader(BuildContext context, T data) {
-    return null;
-  }
+  bool isShowAppBar() => true;
 
-  int getItemCount(T data) {
-    return 0;
-  }
+  bool enablePullUp() => false;
 
-  Widget buildItemBuilder(BuildContext context, T data, int index) {
-    return null;
-  }
+  bool enablePullDown() => true;
 
-  Widget getChild(BuildContext context, T data) {
-    return null;
-  }
+  Widget buildFloatingActionButton(BuildContext context) => null;
 
-  T initialData() {
-    return null;
-  }
+  Widget getHeader(BuildContext context, T data) => null;
 
-  bool isShowSideBar() {
-    return false;
-  }
+  int getItemCount(T data) => 0;
 
-  double getOffset(BuildContext context, String letter) {
-    return 0;
-  }
+  Widget buildItemBuilder(BuildContext context, T data, int index) => null;
+
+  Widget getChild(BuildContext context, T data) => null;
+
+  T initialData() => null;
+
+  bool isShowSideBar() => false;
+
+  bool isShowAppBarActions() => true;
+
+  double getOffset(BuildContext context, String letter) => 0;
 
   void _onPopSelected(BuildContext context, String value) {
     switch (value) {
       case "browser":
         openWebView(context);
-        break;
-      default:
         break;
     }
   }
@@ -132,7 +108,7 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
             onLoadMore: () {
               bloc.onLoadMore();
             },
-            onReload: (){
+            onReload: () {
               bloc.onReload();
             },
             itemCount: getItemCount(snapshot.data),
@@ -152,6 +128,9 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
   }
 
   List<Widget> _getAction(BuildContext context) {
+    if (!isShowAppBarActions()) {
+      return null;
+    }
     return [
       PopupMenuButton(
         padding: const EdgeInsets.all(0.0),

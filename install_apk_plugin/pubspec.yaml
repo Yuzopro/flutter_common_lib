@@ -1,8 +1,8 @@
 name: install_apk_plugin
-description: A new Flutter plugin.
+description: A install android apk plugin.
 version: 0.0.1
-author:
-homepage:
+author: Yuzo
+homepage: https://github.com/Yuzopro
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
