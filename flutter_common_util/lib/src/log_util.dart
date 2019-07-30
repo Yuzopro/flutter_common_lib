@@ -4,11 +4,11 @@
  * @Description: Widget Util.
  * @Date: 2018/9/29
  */
-
 class LogUtil {
-  static const String _TAG_DEF = "###common_utils###";
+  static const String _TAG_DEF = "Yuzo";
 
-  static bool debuggable = true; //是否是debug模式,true: log v 不输出.
+  //是否是debug模式
+  static bool debuggable = true;
   static String TAG = _TAG_DEF;
 
   static void init({bool isDebug = false, String tag = _TAG_DEF}) {

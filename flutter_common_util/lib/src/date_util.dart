@@ -39,6 +39,11 @@ class DateUtil {
     "Sunday"
   ];
 
+  ///今天HH:mm
+  ///昨天HH:mm
+  ///星期几 HH:mm
+  ///MM-dd HH:mm
+  ///yyyy-MM-dd HH:mm
   static String getMultiDateStr(DateTime date) {
     String result = "";
     try {
@@ -95,14 +100,14 @@ class DateUtil {
     ;
     String dateStr;
     if (_isZHFormat(format)) {
-      dateStr = formatZHDateTime(dateTime, format);
+      dateStr = _formatZHDateTime(dateTime, format);
     } else {
-      dateStr = formatDateTime(dateTime, format);
+      dateStr = _formatDateTime(dateTime, format);
     }
     return dateStr;
   }
 
-  static String formatZHDateTime(DateTime dateTime, DateFormat format) {
+  static String _formatZHDateTime(DateTime dateTime, DateFormat format) {
     String dateTimeStr = dateTime.toString();
     dateTimeStr = _convertToZHDateTimeStr(dateTimeStr);
     switch (format) {
@@ -140,7 +145,7 @@ class DateUtil {
     return dateTimeStr;
   }
 
-  static String formatDateTime(DateTime dateTime, DateFormat format) {
+  static String _formatDateTime(DateTime dateTime, DateFormat format) {
     String dateTimeStr = dateTime.toString();
     switch (format) {
       case DateFormat.yyyy_MM_dd_HH_mm_ss: //yyyy-MM-dd HH:mm:ss

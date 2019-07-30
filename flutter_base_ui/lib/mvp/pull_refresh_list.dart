@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_ui/mvp/base_presenter.dart';
 import 'package:flutter_base_ui/mvp/base_state.dart';
 import 'package:flutter_base_ui/mvp/i_base_pull_list_view.dart';
+import 'package:flutter_common_util/flutter_common_util.dart';
 import 'package:open_git/common/config.dart';
 
 abstract class PullRefreshListState<R extends StatefulWidget, T,
@@ -152,8 +153,8 @@ abstract class PullRefreshListState<R extends StatefulWidget, T,
 
   Widget _getEmptyWidget() {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height - 100,
+      width: ScreenUtil.getScreenWidth(context),
+      height: ScreenUtil.getScreenHeight(context) - 100,
       child: Center(
         child: FlatButton(
             onPressed: () {

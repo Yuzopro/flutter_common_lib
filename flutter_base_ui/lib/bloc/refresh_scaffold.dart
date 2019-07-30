@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_ui/flutter_base_ui.dart';
 import 'package:flutter_base_ui/widget/side_bar.dart';
 import 'package:flutter_common_util/flutter_common_util.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:open_git/util/common_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 typedef IndexedOffsetBuilder = double Function(
@@ -161,20 +161,7 @@ class RefreshScaffoldState extends State<RefreshScaffold>
   }
 
   Widget _buildLoading() {
-    return Offstage(
-      offstage: !widget.isLoading,
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        color: Colors.black54,
-        child: Center(
-          child: SpinKitCircle(
-            color: Theme.of(context).primaryColor,
-            size: 25.0,
-          ),
-        ),
-      ),
-    );
+    return CommonUtil.getLoading(context, widget.isLoading);
   }
 
   Widget _buildEmptyView() {

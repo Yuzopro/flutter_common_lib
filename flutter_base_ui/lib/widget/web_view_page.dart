@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_ui/flutter_base_ui.dart';
+import 'package:flutter_common_util/flutter_common_util.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:open_git/util/common_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -76,7 +78,7 @@ class _WebViewState extends State<WebViewPage> {
         body: Stack(
           children: <Widget>[
             _buildWebView(),
-            _buildLoading(),
+            CommonUtil.getLoading(context, _isLoading),
           ],
         ),
       ),
@@ -88,23 +90,6 @@ class _WebViewState extends State<WebViewPage> {
           return Future.value(true);
         }
       },
-    );
-  }
-
-  Widget _buildLoading() {
-    return Offstage(
-      offstage: !_isLoading,
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        color: Colors.black54,
-        child: Center(
-          child: SpinKitCircle(
-            color: Theme.of(context).primaryColor,
-            size: 25.0,
-          ),
-        ),
-      ),
     );
   }
 

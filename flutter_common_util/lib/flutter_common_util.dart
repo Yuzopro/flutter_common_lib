@@ -9,3 +9,5 @@ export 'package:flutter_common_util/src/screen_util.dart';
 export 'package:flutter_common_util/src/sp_util.dart';
 export 'package:flutter_common_util/src/text_util.dart';
 export 'package:flutter_common_util/src/toast_util.dart';
+export 'package:flutter_common_util/src/timer_util.dart';
+
