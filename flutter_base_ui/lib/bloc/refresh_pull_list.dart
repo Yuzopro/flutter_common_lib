@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_ui/flutter_base_ui.dart';
-import 'package:flutter_base_ui/widget/side_bar.dart';
 import 'package:flutter_common_util/flutter_common_util.dart';
 import 'package:open_git/util/common_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -8,8 +7,8 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 typedef IndexedOffsetBuilder = double Function(
     BuildContext context, String letter);
 
-class RefreshScaffold extends StatefulWidget {
-  const RefreshScaffold(
+class RefreshPullList extends StatefulWidget {
+  const RefreshPullList(
       {Key key,
       this.isLoading,
       this.isError: false,
@@ -24,6 +23,7 @@ class RefreshScaffold extends StatefulWidget {
       this.floatingActionButton,
       this.header,
       this.offsetBuilder,
+      this.heroTag,
       this.onReload})
       : super(key: key);
 
@@ -40,14 +40,15 @@ class RefreshScaffold extends StatefulWidget {
   final Widget header;
   final IndexedOffsetBuilder offsetBuilder;
   final Function onReload;
+  final Object heroTag;
 
   @override
   State<StatefulWidget> createState() {
-    return RefreshScaffoldState();
+    return RefreshPullListState();
   }
 }
 
-class RefreshScaffoldState extends State<RefreshScaffold>
+class RefreshPullListState extends State<RefreshPullList>
     with AutomaticKeepAliveClientMixin {
   static final String TAG = "RefreshScaffold";
 
@@ -61,18 +62,19 @@ class RefreshScaffoldState extends State<RefreshScaffold>
   void initState() {
     super.initState();
 
-    _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      int offset = _scrollController.offset.toInt();
-
-      if (offset < 480 && _isShowFloatBtn) {
-        _isShowFloatBtn = false;
-        setState(() {});
-      } else if (offset > 480 && !_isShowFloatBtn) {
-        _isShowFloatBtn = true;
-        setState(() {});
-      }
-    });
+    if (widget.child == null) {
+      _scrollController = ScrollController();
+      _scrollController?.addListener(() {
+        int offset = _scrollController.offset.toInt();
+        if (offset < 480 && _isShowFloatBtn) {
+          _isShowFloatBtn = false;
+          setState(() {});
+        } else if (offset > 480 && !_isShowFloatBtn) {
+          _isShowFloatBtn = true;
+          setState(() {});
+        }
+      });
+    }
   }
 
   @override
@@ -111,12 +113,14 @@ class RefreshScaffoldState extends State<RefreshScaffold>
     }
 
     return FloatingActionButton(
+      //fix There are multiple heroes that share the same tag within a subtree
+      heroTag: widget.heroTag,
       backgroundColor: Theme.of(context).primaryColor,
       child: Icon(
         Icons.keyboard_arrow_up,
       ),
       onPressed: () {
-        _scrollController.animateTo(0.0,
+        _scrollController?.animateTo(0.0,
             duration: Duration(milliseconds: 300), curve: Curves.linear);
       },
     );
@@ -168,23 +172,16 @@ class RefreshScaffoldState extends State<RefreshScaffold>
     return Offstage(
       offstage: widget.itemCount != 0 || widget.isLoading || widget.isError,
       child: Center(
-        child: SizedBox(
-          width: 256.0,
-          height: 256.0,
-          child: Column(
-            children: <Widget>[
-              Icon(
-                Icons.error_outline,
-                size: 128.0,
-                color: Color(YZColors.subLightTextColor),
-              ),
-              SizedBox(height: 5.0),
-              Text(
-                '暂无更多数据',
-                style: YZConstant.normalSubText,
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ImageUtil.getImage('assets/images/ic_no_data.png', 128.0, 128.0),
+            SizedBox(height: 5.0),
+            Text(
+              '暂无更多数据',
+              style: YZConstant.normalSubText,
+            ),
+          ],
         ),
       ),
     );
@@ -200,11 +197,8 @@ class RefreshScaffoldState extends State<RefreshScaffold>
           child: InkWell(
             child: Column(
               children: <Widget>[
-                Icon(
-                  Icons.network_check,
-                  size: 128.0,
-                  color: Color(YZColors.subLightTextColor),
-                ),
+                ImageUtil.getImage(
+                    'assets/images/ic_network_error.png', 128.0, 128.0),
                 SizedBox(height: 5.0),
                 Text(
                   '网络开小差，检查后再试吧',
@@ -232,8 +226,8 @@ class RefreshScaffoldState extends State<RefreshScaffold>
             if (!TextUtil.isEmpty(letter)) {
               double offset = widget.offsetBuilder(context, letter);
               if (offset != null) {
-                _scrollController.jumpTo(offset.clamp(
-                    .0, _scrollController.position.maxScrollExtent));
+                _scrollController?.jumpTo(offset.clamp(
+                    .0, _scrollController?.position.maxScrollExtent));
               }
             }
           },

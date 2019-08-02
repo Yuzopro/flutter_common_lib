@@ -3,8 +3,9 @@ import 'package:flutter_base_ui/bloc/base_bloc.dart';
 import 'package:flutter_base_ui/bloc/bloc_provider.dart';
 import 'package:flutter_base_ui/bloc/loading_bean.dart';
 import 'package:flutter_base_ui/bloc/page_type.dart';
-import 'package:flutter_base_ui/bloc/refresh_scaffold.dart';
+import 'package:flutter_base_ui/bloc/refresh_pull_list.dart';
 import 'package:flutter_base_ui/style/common_style.dart';
+import 'package:flutter_common_util/flutter_common_util.dart';
 import 'package:open_git/util/common_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -38,7 +39,7 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
 
   bool isShowSideBar() => false;
 
-  bool isShowAppBarActions() => true;
+  bool isShowAppBarActions() => false;
 
   double getOffset(BuildContext context, String letter) => 0;
 
@@ -96,7 +97,7 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
 //              'type is ${getPageType().toString()}@isLoading is ' +
 //                  isLoading(snapshot.data).toString(),
 //              tag: TAG);
-          return RefreshScaffold(
+          return RefreshPullList(
             isLoading: isLoading(snapshot.data),
             isError: snapshot.data != null ? snapshot.data.isError : false,
             controller: controller,
@@ -123,6 +124,7 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
                   }
                 : null,
             child: getChild(context, snapshot.data),
+            heroTag: getPageType(),
           );
         });
   }

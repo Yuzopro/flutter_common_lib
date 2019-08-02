@@ -1,7 +1,8 @@
 enum PageType {
   home, //主页
   repos, //项目
-  event, //动态
+  received_event, //动态
+  user_event, //所有动态
   issue, //问题
   repos_detail, //项目详情
   repos_user, //用户资料项目列表
@@ -25,4 +26,10 @@ enum PageType {
   trending_repos, //趋势项目
   trending_user, //趋势用户
   trending_language, //趋势语言
+  profile, //用户资料
+  profile_orgs, //用户组织
+  org_profile,//组织资料
+  org_event, //组织动态
+  org_repos, //组织仓库
+  org_member, //组织成员
 }

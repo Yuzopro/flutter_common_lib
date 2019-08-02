@@ -19,6 +19,8 @@ abstract class BaseBloc<T extends LoadingBean> {
 
   bool noMore = true;
 
+  T bean;
+
   BehaviorSubject<T> _subject = BehaviorSubject<T>();
 
   Sink<T> get sink => _subject.sink;
@@ -59,5 +61,15 @@ abstract class BaseBloc<T extends LoadingBean> {
 
   void refreshStatusEvent() {
     statusSink.add(StatusEvent(page, noMore, getPageType()));
+  }
+
+  void showLoading() {
+    bean.isLoading = true;
+    sink.add(bean);
+  }
+
+  void hideLoading() {
+    bean.isLoading = false;
+    sink.add(bean);
   }
 }
