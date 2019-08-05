@@ -43,16 +43,6 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
 
   double getOffset(BuildContext context, String letter) => 0;
 
-  void _onPopSelected(BuildContext context, String value) {
-    switch (value) {
-      case "browser":
-        openWebView(context);
-        break;
-    }
-  }
-
-  void openWebView(BuildContext context) {}
-
   @override
   Widget build(BuildContext context) {
     B bloc = BlocProvider.of<B>(context);
@@ -140,34 +130,58 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
           _onPopSelected(context, value);
         },
         itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
-          PopupMenuItem<String>(
-            value: "browser",
-            child: ListTile(
-              contentPadding: EdgeInsets.all(0.0),
-              dense: false,
-              title: Container(
-                alignment: Alignment.center,
-                child: Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.language,
-                      color: Color(YZColors.mainTextColor),
-                      size: 22.0,
-                    ),
-                    SizedBox(
-                      width: 5.0,
-                    ),
-                    Text(
-                      '浏览器打开',
-                      style: YZConstant.middleText,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
+          _getPopupMenuItem('browser', Icons.language, '浏览器打开'),
+          _getPopupMenuItem('share', Icons.share, '分享'),
         ],
       )
     ];
   }
+
+  PopupMenuItem _getPopupMenuItem(String value, IconData icon, String title) {
+    return PopupMenuItem<String>(
+      value: value,
+      child: ListTile(
+        contentPadding: EdgeInsets.all(0.0),
+        dense: false,
+        title: Container(
+          alignment: Alignment.center,
+          child: Row(
+            children: <Widget>[
+              Icon(
+                icon,
+                color: Color(YZColors.mainTextColor),
+                size: 22.0,
+              ),
+              SizedBox(
+                width: 5.0,
+              ),
+              Text(
+                title,
+                style: YZConstant.middleText,
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _onPopSelected(BuildContext context, String value) {
+    switch (value) {
+      case "browser":
+        openWebView(context);
+        break;
+      case 'share':
+        _share(context);
+        break;
+    }
+  }
+
+  void openWebView(BuildContext context) {}
+
+  void _share(BuildContext context) {
+    ShareUtil.share(getShareText(context));
+  }
+
+  String getShareText(BuildContext context) => '';
 }

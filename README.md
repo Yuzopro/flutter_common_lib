@@ -504,6 +504,13 @@ TimerUtil.delay(500, (_) {
 ToastUtil.showMessgae('再按一次离开App');
 ```
 
+### 分享（ShareUtil）
+
+```dart
+ShareUtil.share(OPEN_GIT_HOME);
+```
+
+
 ## 安装APK插件
 
 ```dart

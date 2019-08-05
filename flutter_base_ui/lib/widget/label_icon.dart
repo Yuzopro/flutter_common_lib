@@ -15,7 +15,9 @@ class LabelIcon extends StatelessWidget {
     final double paddingUnit = buttonTheme.padding.horizontal / 4.0;
 
     return InkWell(
-      onTap: () => onPressed,
+      onTap: () {
+        onPressed();
+      },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: paddingUnit),
         child: Row(
