@@ -25,6 +25,8 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
 
   bool enablePullDown() => true;
 
+  bool isShowEmpty(T data) => true;
+
   Widget buildFloatingActionButton(BuildContext context) => null;
 
   Widget getHeader(BuildContext context, T data) => null;
@@ -51,7 +53,7 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
     return Scaffold(
       appBar: isShowAppBar()
           ? CommonUtil.getAppBar(getTitle(context),
-              actions: _getAction(context))
+              actions: getAction(context))
           : null,
       body: _buildBody(context, bloc),
     );
@@ -62,9 +64,9 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
 
     bloc.statusStream.listen((event) {
       if (event.type == getPageType()) {
-//        LogUtil.v(
-//            'page is ${event.page}@type is ${event.type}@noMore is ${event.noMore}',
-//            tag: TAG);
+        LogUtil.v(
+            'page is ${event.page}@type is ${event.type}@noMore is ${event.noMore}',
+            tag: TAG);
         if (event.page == 1) {
           controller.refreshCompleted(/*resetFooterState: event.noMore*/);
           if (event.noMore) {
@@ -115,11 +117,12 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
                 : null,
             child: getChild(context, snapshot.data),
             heroTag: getPageType(),
+            isShowEmpty: isShowEmpty(snapshot.data),
           );
         });
   }
 
-  List<Widget> _getAction(BuildContext context) {
+  List<Widget> getAction(BuildContext context) {
     if (!isShowAppBarActions()) {
       return null;
     }
@@ -127,17 +130,17 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
       PopupMenuButton(
         padding: const EdgeInsets.all(0.0),
         onSelected: (value) {
-          _onPopSelected(context, value);
+          onPopSelected(context, value);
         },
         itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
-          _getPopupMenuItem('browser', Icons.language, '浏览器打开'),
-          _getPopupMenuItem('share', Icons.share, '分享'),
+          getPopupMenuItem('browser', Icons.language, '浏览器打开'),
+          getPopupMenuItem('share', Icons.share, '分享'),
         ],
       )
     ];
   }
 
-  PopupMenuItem _getPopupMenuItem(String value, IconData icon, String title) {
+  PopupMenuItem getPopupMenuItem(String value, IconData icon, String title) {
     return PopupMenuItem<String>(
       value: value,
       child: ListTile(
@@ -166,7 +169,7 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
     );
   }
 
-  void _onPopSelected(BuildContext context, String value) {
+  void onPopSelected(BuildContext context, String value) {
     switch (value) {
       case "browser":
         openWebView(context);

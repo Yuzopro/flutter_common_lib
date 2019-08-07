@@ -30,4 +30,9 @@ class ColorUtil {
     // 通过fromRGBO返回带透明度和RGB值的颜色
     return Color.fromRGBO(red, green, blue, alpha);
   }
+
+  static String color2RGB(Color color) {
+    String argb = color.value.toRadixString(16).padLeft(8, '0');
+    return argb.substring(2);
+  }
 }

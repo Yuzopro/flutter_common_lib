@@ -24,6 +24,7 @@ class RefreshPullList extends StatefulWidget {
       this.header,
       this.offsetBuilder,
       this.heroTag,
+      this.isShowEmpty,
       this.onReload})
       : super(key: key);
 
@@ -41,6 +42,7 @@ class RefreshPullList extends StatefulWidget {
   final IndexedOffsetBuilder offsetBuilder;
   final Function onReload;
   final Object heroTag;
+  final bool isShowEmpty;
 
   @override
   State<StatefulWidget> createState() {
@@ -170,7 +172,7 @@ class RefreshPullListState extends State<RefreshPullList>
 
   Widget _buildEmptyView() {
     return Offstage(
-      offstage: widget.itemCount != 0 || widget.isLoading || widget.isError,
+      offstage: widget.itemCount != 0 || widget.isLoading || widget.isError || !widget.isShowEmpty,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

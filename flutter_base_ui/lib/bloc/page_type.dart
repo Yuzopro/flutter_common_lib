@@ -32,4 +32,7 @@ enum PageType {
   org_event, //组织动态
   org_repos, //组织仓库
   org_member, //组织成员
+  issue_label,//问题标签
+  repo_contributors,
+  repo_stargazers,
 }
