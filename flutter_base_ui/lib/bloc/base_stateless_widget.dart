@@ -64,9 +64,9 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
 
     bloc.statusStream.listen((event) {
       if (event.type == getPageType()) {
-        LogUtil.v(
-            'page is ${event.page}@type is ${event.type}@noMore is ${event.noMore}',
-            tag: TAG);
+//        LogUtil.v(
+//            'page is ${event.page}@type is ${event.type}@noMore is ${event.noMore}',
+//            tag: TAG);
         if (event.page == 1) {
           controller.refreshCompleted(/*resetFooterState: event.noMore*/);
           if (event.noMore) {

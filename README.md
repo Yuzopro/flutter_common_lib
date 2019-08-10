@@ -384,7 +384,10 @@ class _WebViewState extends State<WebViewPage> {
 ### 颜色工具类（ColorUtil）
 
 ```dart
+//str->color
 Color color = ColorUtil.str2Color('0xff000000');
+//color->str
+String color = ColorUtil.color2RGB(_currentColor);
 ```
 
 ### 日期工具类（DateUtil）

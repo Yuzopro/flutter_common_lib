@@ -35,4 +35,7 @@ enum PageType {
   issue_label,//问题标签
   repo_contributors,
   repo_stargazers,
+  repo_subscribers,
+  repo_issue,
+  repo_fork,
 }
