@@ -57,7 +57,7 @@ abstract class BaseState<T extends StatefulWidget, P extends BasePresenter<V>,
               actions: getActions(),
               title: Text(
                 title,
-                style: YZConstant.normalTextWhite,
+                style: YZStyle.normalTextWhite,
               ),
             ),
       body: buildBody(context),

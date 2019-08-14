@@ -36,7 +36,7 @@ class _WebViewState extends State<WebViewPage> {
                   widget.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: YZConstant.normalTextWhite,
+                  style: YZStyle.normalTextWhite,
                 ),
                 actions: <Widget>[
                   PopupMenuButton(
@@ -93,7 +93,7 @@ class _WebViewState extends State<WebViewPage> {
             children: <Widget>[
               Icon(
                 icon,
-                color: Color(YZColors.mainTextColor),
+                color: Color(YZColors.textColor),
                 size: 22.0,
               ),
               SizedBox(
@@ -101,7 +101,7 @@ class _WebViewState extends State<WebViewPage> {
               ),
               Text(
                 title,
-                style: YZConstant.middleText,
+                style: YZStyle.middleText,
               )
             ],
           ),

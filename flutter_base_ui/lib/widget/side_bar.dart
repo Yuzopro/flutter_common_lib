@@ -50,8 +50,8 @@ class SideBar extends StatefulWidget {
       this.letterHeight: 18,
       this.color: Colors.transparent,
       this.touchDownColor: const Color(0x40E0E0E0),
-      this.textStyle: YZConstant.minSubText,
-      this.touchDownTextStyle: YZConstant.minText})
+      this.textStyle: YZStyle.minSubText,
+      this.touchDownTextStyle: YZStyle.minText})
       : super(key: key);
 
   @override

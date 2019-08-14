@@ -14,30 +14,31 @@ class PhotoViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            title,
-            style: YZConstant.normalTextWhite,
-          ),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          title,
+          style: YZStyle.normalTextWhite,
         ),
-        body: Container(
-          color: Colors.black,
-          child: PhotoView(
-            imageProvider: NetworkImage(url),
-            loadingChild: Container(
-              child: Stack(
-                children: <Widget>[
-                  Center(
-                      child: ImageUtil.getImage(
-                          ImagePath.image_default_head, 180.0, 180.0)),
-                  Center(
-                    child: SpinKitCircle(color: Colors.white30, size: 25.0),
-                  ),
-                ],
-              ),
+      ),
+      body: Container(
+        color: Colors.black,
+        child: PhotoView(
+          imageProvider: NetworkImage(url),
+          loadingChild: Container(
+            child: Stack(
+              children: <Widget>[
+                Center(
+                    child: ImageUtil.getImage(
+                        ImagePath.image_default_head, 180.0, 180.0)),
+                Center(
+                  child: SpinKitCircle(color: Colors.white30, size: 25.0),
+                ),
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

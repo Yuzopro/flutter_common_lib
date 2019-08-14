@@ -6,35 +6,21 @@ class YZFonts {
 }
 
 class YZColors {
-  static const String primaryValueString = "#24292E";
-  static const String primaryLightValueString = "#42464b";
-  static const String primaryDarkValueString = "#121917";
-  static const String miWhiteString = "#ececec";
-  static const String actionBlueString = "#267aff";
-  static const String webDraculaBackgroundColorString = "#282a36";
-
-  static const int primaryValue = 0xFF24292E;
-  static const int primaryLightValue = 0xFF42464b;
-  static const int primaryDarkValue = 0xFF121917;
-
-  static const int cardWhite = 0xFFFFFFFF;
-  static const int textWhite = 0xFFFFFFFF;
   static const int miWhite = 0xFFF4F5F6;
+
   static const int white = 0xFFFFFFFF;
-  static const int actionBlue = 0xff267aff;
-  static const int subLightTextColor = 0xffc4c4c4;
 
   static const int mainBackgroundColor = miWhite;
 
-  static const int mainTextColor = 0xFF081530;
-  static const int t65MainTextColor = 0xA6081530;
+  static const int textColor = 0xFF081530;
+  static const int t65TextColor = 0xA6081530;
   static const int subTextColor = 0xFF8C939F;
   static const int textColorWhite = white;
 
   static const int redPointColor = 0xFFED5E4B;
 }
 
-class YZConstant {
+class YZStyle {
   static const lagerTextSize = 30.0;
   static const bigTextSize = 23.0;
   static const normalTextSize = 18.0;
@@ -50,7 +36,7 @@ class YZConstant {
 
   static const minText = TextStyle(
     fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.mainTextColor),
+    color: Color(YZColors.textColor),
     fontSize: minTextSize,
   );
 
@@ -62,39 +48,21 @@ class YZConstant {
 
   static const smallText = TextStyle(
     fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.mainTextColor),
+    color: Color(YZColors.textColor),
     fontSize: smallTextSize,
   );
 
   static const smallTextT65 = TextStyle(
     fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.t65MainTextColor),
+    color: Color(YZColors.t65TextColor),
     fontSize: smallTextSize,
   );
 
   static const smallTextBold = TextStyle(
     fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.mainTextColor),
+    color: Color(YZColors.textColor),
     fontSize: smallTextSize,
     fontWeight: FontWeight.bold,
-  );
-
-  static const smallSubLightText = TextStyle(
-    fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.subLightTextColor),
-    fontSize: smallTextSize,
-  );
-
-  static const smallActionLightText = TextStyle(
-    fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.actionBlue),
-    fontSize: smallTextSize,
-  );
-
-  static const smallMiLightText = TextStyle(
-    fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.miWhite),
-    fontSize: smallTextSize,
   );
 
   static const smallSubText = TextStyle(
@@ -105,7 +73,7 @@ class YZConstant {
 
   static const middleText = TextStyle(
     fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.mainTextColor),
+    color: Color(YZColors.textColor),
     fontSize: middleTextWhiteSize,
   );
 
@@ -120,16 +88,10 @@ class YZConstant {
     color: Color(YZColors.subTextColor),
     fontSize: middleTextWhiteSize,
   );
-
-  static const middleSubLightText = TextStyle(
-    fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.subLightTextColor),
-    fontSize: middleTextWhiteSize,
-  );
-
+  
   static const middleTextBold = TextStyle(
     fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.mainTextColor),
+    color: Color(YZColors.textColor),
     fontSize: middleTextWhiteSize,
     fontWeight: FontWeight.bold,
   );
@@ -150,13 +112,13 @@ class YZConstant {
 
   static const normalText = TextStyle(
     fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.mainTextColor),
+    color: Color(YZColors.textColor),
     fontSize: normalTextSize,
   );
 
   static const normalTextBold = TextStyle(
     fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.mainTextColor),
+    color: Color(YZColors.textColor),
     fontSize: normalTextSize,
     fontWeight: FontWeight.bold,
   );
@@ -180,28 +142,15 @@ class YZConstant {
     fontWeight: FontWeight.bold,
   );
 
-  static const normalTextActionWhiteBold = TextStyle(
-    fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.actionBlue),
-    fontSize: normalTextSize,
-    fontWeight: FontWeight.bold,
-  );
-
-  static const normalTextLight = TextStyle(
-    fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.primaryLightValue),
-    fontSize: normalTextSize,
-  );
-
   static const largeText = TextStyle(
     fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.mainTextColor),
+    color: Color(YZColors.textColor),
     fontSize: bigTextSize,
   );
 
   static const largeTextBold = TextStyle(
     fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.mainTextColor),
+    color: Color(YZColors.textColor),
     fontSize: bigTextSize,
     fontWeight: FontWeight.bold,
   );
@@ -228,8 +177,15 @@ class YZConstant {
 
   static const largeLargeText = TextStyle(
     fontFamily: YZFonts.montserrat_font_family,
-    color: Color(YZColors.primaryValue),
+    color: Color(YZColors.textColor),
     fontSize: lagerTextSize,
     fontWeight: FontWeight.bold,
   );
+}
+
+class YZSize {
+  static const SMALL_IMAGE_SIZE = 18.0;
+  static const NORMAL_IMAGE_SIZE = 24.0;
+  static const BIG_IMAGE_SIZE = 36.0;
+  static const LARGE_IMAGE_SIZE = 48.0;
 }

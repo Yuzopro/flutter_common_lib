@@ -22,4 +22,12 @@ class TextUtil {
   static String replace(String text, Pattern from, String replace) {
     return text?.replaceAll(from, replace);
   }
+
+  static bool contains(String text, String other) {
+    if (TextUtil.isEmpty(text)) {
+      return false;
+    }
+
+    return text.contains(other);
+  }
 }

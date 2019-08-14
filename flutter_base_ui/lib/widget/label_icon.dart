@@ -30,7 +30,7 @@ class LabelIcon extends StatelessWidget {
               label,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: YZConstant.smallSubText,
+              style: YZStyle.smallSubText,
             )
           ],
         ),

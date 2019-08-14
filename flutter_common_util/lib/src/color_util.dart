@@ -31,6 +31,7 @@ class ColorUtil {
     return Color.fromRGBO(red, green, blue, alpha);
   }
 
+  ///返回格式 000000
   static String color2RGB(Color color) {
     String argb = color.value.toRadixString(16).padLeft(8, '0');
     return argb.substring(2);

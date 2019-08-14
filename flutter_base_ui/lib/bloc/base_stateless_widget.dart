@@ -152,7 +152,7 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
             children: <Widget>[
               Icon(
                 icon,
-                color: Color(YZColors.mainTextColor),
+                color: Color(YZColors.textColor),
                 size: 22.0,
               ),
               SizedBox(
@@ -160,7 +160,7 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
               ),
               Text(
                 title,
-                style: YZConstant.middleText,
+                style: YZStyle.middleText,
               )
             ],
           ),

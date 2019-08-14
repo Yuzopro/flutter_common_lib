@@ -14,38 +14,27 @@ OpenGit公共库目前包含三部分
 
 ### 基本Style的提供
 
-提供APP主色调以及文本的基本样式，如下面代码所示
+主要颜色，如下面代码所示
 ```dart
 class YZColors {
-  static const String primaryValueString = "#24292E";
-  static const String primaryLightValueString = "#42464b";
-  static const String primaryDarkValueString = "#121917";
-  static const String miWhiteString = "#ececec";
-  static const String actionBlueString = "#267aff";
-  static const String webDraculaBackgroundColorString = "#282a36";
-
-  static const int primaryValue = 0xFF24292E;
-  static const int primaryLightValue = 0xFF42464b;
-  static const int primaryDarkValue = 0xFF121917;
-
-  static const int cardWhite = 0xFFFFFFFF;
-  static const int textWhite = 0xFFFFFFFF;
   static const int miWhite = 0xFFF4F5F6;
+
   static const int white = 0xFFFFFFFF;
-  static const int actionBlue = 0xff267aff;
-  static const int subLightTextColor = 0xffc4c4c4;
 
   static const int mainBackgroundColor = miWhite;
 
-  static const int mainTextColor = 0xFF081530;
-  static const int t65MainTextColor = 0xA6081530;
+  static const int textColor = 0xFF081530;
+  static const int t65TextColor = 0xA6081530;
   static const int subTextColor = 0xFF8C939F;
   static const int textColorWhite = white;
 
   static const int redPointColor = 0xFFED5E4B;
 }
+```
 
-class YZConstant {
+文本主要样式，如下面代码所示
+```dart
+class YZStyle {
   static const lagerTextSize = 30.0;
   static const bigTextSize = 23.0;
   static const normalTextSize = 18.0;
@@ -54,166 +43,183 @@ class YZConstant {
   static const minTextSize = 12.0;
 
   static const minSubText = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.subTextColor),
     fontSize: minTextSize,
   );
 
+  static const minText = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
+    color: Color(YZColors.textColor),
+    fontSize: minTextSize,
+  );
+
   static const smallTextWhite = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.textColorWhite),
     fontSize: smallTextSize,
   );
 
   static const smallText = TextStyle(
-    color: Color(YZColors.mainTextColor),
+    fontFamily: YZFonts.montserrat_font_family,
+    color: Color(YZColors.textColor),
     fontSize: smallTextSize,
   );
 
   static const smallTextT65 = TextStyle(
-    color: Color(YZColors.t65MainTextColor),
+    fontFamily: YZFonts.montserrat_font_family,
+    color: Color(YZColors.t65TextColor),
     fontSize: smallTextSize,
   );
 
   static const smallTextBold = TextStyle(
-    color: Color(YZColors.mainTextColor),
+    fontFamily: YZFonts.montserrat_font_family,
+    color: Color(YZColors.textColor),
     fontSize: smallTextSize,
     fontWeight: FontWeight.bold,
   );
 
-  static const smallSubLightText = TextStyle(
-    color: Color(YZColors.subLightTextColor),
-    fontSize: smallTextSize,
-  );
-
-  static const smallActionLightText = TextStyle(
-    color: Color(YZColors.actionBlue),
-    fontSize: smallTextSize,
-  );
-
-  static const smallMiLightText = TextStyle(
-    color: Color(YZColors.miWhite),
-    fontSize: smallTextSize,
-  );
-
   static const smallSubText = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.subTextColor),
     fontSize: smallTextSize,
   );
 
   static const middleText = TextStyle(
-    color: Color(YZColors.mainTextColor),
+    fontFamily: YZFonts.montserrat_font_family,
+    color: Color(YZColors.textColor),
     fontSize: middleTextWhiteSize,
   );
 
   static const middleTextWhite = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.textColorWhite),
     fontSize: middleTextWhiteSize,
   );
 
   static const middleSubText = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.subTextColor),
     fontSize: middleTextWhiteSize,
   );
-
-  static const middleSubLightText = TextStyle(
-    color: Color(YZColors.subLightTextColor),
-    fontSize: middleTextWhiteSize,
-  );
-
+  
   static const middleTextBold = TextStyle(
-    color: Color(YZColors.mainTextColor),
+    fontFamily: YZFonts.montserrat_font_family,
+    color: Color(YZColors.textColor),
     fontSize: middleTextWhiteSize,
     fontWeight: FontWeight.bold,
   );
 
   static const middleTextWhiteBold = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.textColorWhite),
     fontSize: middleTextWhiteSize,
     fontWeight: FontWeight.bold,
   );
 
   static const middleSubTextBold = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.subTextColor),
     fontSize: middleTextWhiteSize,
     fontWeight: FontWeight.bold,
   );
 
   static const normalText = TextStyle(
-    color: Color(YZColors.mainTextColor),
+    fontFamily: YZFonts.montserrat_font_family,
+    color: Color(YZColors.textColor),
     fontSize: normalTextSize,
   );
 
   static const normalTextBold = TextStyle(
-    color: Color(YZColors.mainTextColor),
+    fontFamily: YZFonts.montserrat_font_family,
+    color: Color(YZColors.textColor),
     fontSize: normalTextSize,
     fontWeight: FontWeight.bold,
   );
 
   static const normalSubText = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.subTextColor),
     fontSize: normalTextSize,
   );
 
   static const normalTextWhite = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.textColorWhite),
     fontSize: normalTextSize,
   );
 
   static const normalTextMitWhiteBold = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.miWhite),
     fontSize: normalTextSize,
     fontWeight: FontWeight.bold,
   );
 
-  static const normalTextActionWhiteBold = TextStyle(
-    color: Color(YZColors.actionBlue),
-    fontSize: normalTextSize,
-    fontWeight: FontWeight.bold,
-  );
-
-  static const normalTextLight = TextStyle(
-    color: Color(YZColors.primaryLightValue),
-    fontSize: normalTextSize,
-  );
-
   static const largeText = TextStyle(
-    color: Color(YZColors.mainTextColor),
+    fontFamily: YZFonts.montserrat_font_family,
+    color: Color(YZColors.textColor),
     fontSize: bigTextSize,
   );
 
   static const largeTextBold = TextStyle(
-    color: Color(YZColors.mainTextColor),
+    fontFamily: YZFonts.montserrat_font_family,
+    color: Color(YZColors.textColor),
     fontSize: bigTextSize,
     fontWeight: FontWeight.bold,
   );
 
   static const largeTextWhite = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.textColorWhite),
     fontSize: bigTextSize,
   );
 
   static const largeTextWhiteBold = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.textColorWhite),
     fontSize: bigTextSize,
     fontWeight: FontWeight.bold,
   );
 
   static const largeLargeTextWhite = TextStyle(
+    fontFamily: YZFonts.montserrat_font_family,
     color: Color(YZColors.textColorWhite),
     fontSize: lagerTextSize,
     fontWeight: FontWeight.bold,
   );
 
   static const largeLargeText = TextStyle(
-    color: Color(YZColors.primaryValue),
+    fontFamily: YZFonts.montserrat_font_family,
+    color: Color(YZColors.textColor),
     fontSize: lagerTextSize,
     fontWeight: FontWeight.bold,
   );
 }
 ```
 
+主要字体，如下面代码所示
+```dart
+class YZFonts {
+  static const String montserrat_font_family = 'Montserrat';
+}
+```
+
+主要图片大小，如下面代码所示
+```dart
+class YZSize {
+  static const SMALL_IMAGE_SIZE = 18.0;
+  static const NORMAL_IMAGE_SIZE = 24.0;
+  static const BIG_IMAGE_SIZE = 36.0;
+  static const LARGE_IMAGE_SIZE = 48.0;
+}
+```
+
 ### 基础Widget
 
 #### 图片浏览Widget
+
+支持网络图片的加载，如下面代码所示
 ```dart
 class PhotoViewPage extends StatelessWidget {
   final String title;
@@ -224,36 +230,39 @@ class PhotoViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            title,
-            style: YZConstant.normalTextWhite,
-          ),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          title,
+          style: YZStyle.normalTextWhite,
         ),
-        body: Container(
-          color: Colors.black,
-          child: PhotoView(
-            imageProvider: NetworkImage(url),
-            loadingChild: Container(
-              child: Stack(
-                children: <Widget>[
-                  Center(
-                      child: ImageUtil.getImage(
-                          'assets/images/ic_default_head.png', 180.0, 180.0)),
-                  Center(
-                    child: SpinKitCircle(color: Colors.white30, size: 25.0),
-                  ),
-                ],
-              ),
+      ),
+      body: Container(
+        color: Colors.black,
+        child: PhotoView(
+          imageProvider: NetworkImage(url),
+          loadingChild: Container(
+            child: Stack(
+              children: <Widget>[
+                Center(
+                    child: ImageUtil.getImage(
+                        ImagePath.image_default_head, 180.0, 180.0)),
+                Center(
+                  child: SpinKitCircle(color: Colors.white30, size: 25.0),
+                ),
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 ```
 
 #### h5网页加载Widget
+
+支持h5链接的加载、系统浏览器打开以及分享等功能，如下面代码所示
 ```dart
 typedef OnWillPop = void Function(BuildContext context);
 
@@ -286,7 +295,7 @@ class _WebViewState extends State<WebViewPage> {
                   widget.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: YZConstant.normalTextWhite,
+                  style: YZStyle.normalTextWhite,
                 ),
                 actions: <Widget>[
                   PopupMenuButton(
@@ -294,32 +303,8 @@ class _WebViewState extends State<WebViewPage> {
                     onSelected: _onPopSelected,
                     itemBuilder: (BuildContext context) =>
                         <PopupMenuItem<String>>[
-                      PopupMenuItem<String>(
-                        value: "browser",
-                        child: ListTile(
-                          contentPadding: EdgeInsets.all(0.0),
-                          dense: false,
-                          title: Container(
-                            alignment: Alignment.center,
-                            child: Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.language,
-                                  color: Color(YZColors.mainTextColor),
-                                  size: 22.0,
-                                ),
-                                SizedBox(
-                                  width: 5.0,
-                                ),
-                                Text(
-                                  '系统浏览器打开',
-                                  style: YZConstant.middleText,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                          _getPopupMenuItem('browser', Icons.language, '浏览器打开'),
+                          _getPopupMenuItem('share', Icons.share, '分享'),
                     ],
                   ),
                 ],
@@ -355,12 +340,42 @@ class _WebViewState extends State<WebViewPage> {
     );
   }
 
+  PopupMenuItem _getPopupMenuItem(String value, IconData icon, String title) {
+    return PopupMenuItem<String>(
+      value: value,
+      child: ListTile(
+        contentPadding: EdgeInsets.all(0.0),
+        dense: false,
+        title: Container(
+          alignment: Alignment.center,
+          child: Row(
+            children: <Widget>[
+              Icon(
+                icon,
+                color: Color(YZColors.textColor),
+                size: 22.0,
+              ),
+              SizedBox(
+                width: 5.0,
+              ),
+              Text(
+                title,
+                style: YZStyle.middleText,
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   void _onPopSelected(String value) {
     switch (value) {
       case "browser":
         _launchInBrowser(widget.url, title: widget.title);
         break;
-      default:
+      case 'share':
+        ShareUtil.share(widget.url);
         break;
     }
   }
@@ -384,9 +399,9 @@ class _WebViewState extends State<WebViewPage> {
 ### 颜色工具类（ColorUtil）
 
 ```dart
-//str->color
+//str->color(0x000000,0xff000000,#000000)
 Color color = ColorUtil.str2Color('0xff000000');
-//color->str
+//color->str(000000)
 String color = ColorUtil.color2RGB(_currentColor);
 ```
 
@@ -530,6 +545,10 @@ InstallApkPlugin.installApk(path);
 ## Thanks For
 
 - [Sky24n](https://github.com/Sky24n)
+
+## 项目地址
+
+[OpenGit客户端](https://github.com/Yuzopro/OpenGit_Flutter)
 
 ## 关于作者
 

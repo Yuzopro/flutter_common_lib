@@ -39,9 +39,9 @@ class SideBar extends StatefulWidget {
     this.width = 30,
     this.letterHeight = 16,
     this.color = Colors.transparent,
-    this.textStyle = YZConstant.minSubText,
+    this.textStyle = YZStyle.minSubText,
     this.touchDownColor = const Color(0x40E0E0E0),
-    this.touchDownTextStyle = YZConstant.minText,
+    this.touchDownTextStyle = YZStyle.minText,
   });
 
   final int width;

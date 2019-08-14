@@ -181,7 +181,7 @@ class RefreshPullListState extends State<RefreshPullList>
             SizedBox(height: 5.0),
             Text(
               '暂无更多数据',
-              style: YZConstant.normalSubText,
+              style: YZStyle.normalSubText,
             ),
           ],
         ),
@@ -204,7 +204,7 @@ class RefreshPullListState extends State<RefreshPullList>
                 SizedBox(height: 5.0),
                 Text(
                   '网络开小差，检查后再试吧',
-                  style: YZConstant.normalSubText,
+                  style: YZStyle.normalSubText,
                 ),
               ],
             ),
@@ -250,7 +250,7 @@ class RefreshPullListState extends State<RefreshPullList>
           color: Color(0x40000000),
           child: Text(
             TextUtil.isEmpty(_letter) ? '' : _letter,
-            style: YZConstant.largeLargeTextWhite,
+            style: YZStyle.largeLargeTextWhite,
           ),
         ),
       ),
