@@ -11,7 +11,7 @@ dependencies:
   # 异步处理（flutter_base_ui）
   rxdart: ^0.22.0
   # 下拉加载（flutter_base_ui）
-  pull_to_refresh: ^1.1.6
+  pull_to_refresh: ^1.5.5
   # 浏览器（flutter_base_ui）
   webview_flutter: ^0.3.7+1
   # 图片浏览（flutter_base_ui）
