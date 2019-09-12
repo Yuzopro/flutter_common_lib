@@ -32,8 +32,8 @@ class RefreshPullList extends StatefulWidget {
   final bool isError;
   final RefreshController controller;
   final bool enablePullDown, enablePullUp;
-  final RefreshCallback onRefresh;
-  final RefreshCallback onLoadMore;
+  final VoidCallback onRefresh;
+  final VoidCallback onLoadMore;
   final Widget child;
   final int itemCount;
   final IndexedWidgetBuilder itemBuilder;

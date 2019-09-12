@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_ui/bloc/base_bloc.dart';
 import 'package:flutter_base_ui/bloc/bloc_provider.dart';
 import 'package:flutter_base_ui/bloc/loading_bean.dart';
-import 'package:flutter_base_ui/bloc/page_type.dart';
 import 'package:flutter_base_ui/bloc/refresh_pull_list.dart';
 import 'package:flutter_base_ui/style/common_style.dart';
 import 'package:flutter_common_util/flutter_common_util.dart';
@@ -13,15 +12,13 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
     extends StatelessWidget {
   static final String TAG = "BaseStatelessWidget";
 
-  PageType getPageType();
-
   bool isLoading(T data);
 
   String getTitle(BuildContext context) => '';
 
   bool isShowAppBar() => true;
 
-  bool enablePullUp() => false;
+  bool enablePullUp(BuildContext context) => false;
 
   bool enablePullDown() => true;
 
@@ -45,6 +42,24 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
 
   double getOffset(BuildContext context, String letter) => 0;
 
+  final RefreshController _refreshController = RefreshController();
+
+  void onRefresh(BuildContext context) async {
+    BaseBloc bloc = BlocProvider.of<B>(context);
+    await bloc.onRefresh();
+    _refreshController.refreshCompleted(resetFooterState: true);
+  }
+
+  void onLoadMore(BuildContext context) async {
+    BaseBloc bloc = BlocProvider.of<B>(context);
+    await bloc.onLoadMore();
+    if (bloc.noMore) {
+      _refreshController.loadNoData();
+    } else {
+      _refreshController.loadComplete();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     B bloc = BlocProvider.of<B>(context);
@@ -60,27 +75,6 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
   }
 
   Widget _buildBody(BuildContext context, B bloc) {
-    RefreshController controller = RefreshController();
-
-    bloc.statusStream.listen((event) {
-      if (event.type == getPageType()) {
-//        LogUtil.v(
-//            'page is ${event.page}@type is ${event.type}@noMore is ${event.noMore}',
-//            tag: TAG);
-        if (event.page == 1) {
-          controller.refreshCompleted(/*resetFooterState: event.noMore*/);
-          if (event.noMore) {
-            controller.loadComplete();
-            controller.loadNoData();
-          }
-        } else if (event.noMore) {
-          controller.loadNoData();
-        } else {
-          controller.loadComplete();
-        }
-      }
-    });
-
     return StreamBuilder(
         stream: bloc.stream,
         initialData: initialData(),
@@ -92,14 +86,14 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
           return RefreshPullList(
             isLoading: isLoading(snapshot.data),
             isError: snapshot.data != null ? snapshot.data.isError : false,
-            controller: controller,
+            controller: _refreshController,
             enablePullDown: enablePullDown(),
-            enablePullUp: enablePullUp(),
+            enablePullUp: enablePullUp(context),
             onRefresh: () {
-              bloc.onRefresh();
+              onRefresh(context);
             },
             onLoadMore: () {
-              bloc.onLoadMore();
+              onLoadMore(context);
             },
             onReload: () {
               bloc.onReload();
@@ -116,10 +110,15 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
                   }
                 : null,
             child: getChild(context, snapshot.data),
-            heroTag: getPageType(),
+            heroTag: _getHeroTag(),
             isShowEmpty: isShowEmpty(snapshot.data),
           );
         });
+  }
+
+  Object _getHeroTag() {
+    LogUtil.v("_getHeroTag is " + this.toString());
+    return this;
   }
 
   List<Widget> getAction(BuildContext context) {

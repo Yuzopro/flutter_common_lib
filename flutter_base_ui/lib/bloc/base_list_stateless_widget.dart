@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_ui/bloc/base_list_bloc.dart';
 import 'package:flutter_base_ui/bloc/base_stateless_widget.dart';
+import 'package:flutter_base_ui/bloc/bloc_provider.dart';
 import 'package:flutter_base_ui/bloc/loading_bean.dart';
 
 abstract class BaseListStatelessWidget<T, B extends BaseListBloc<T>>
@@ -10,8 +11,10 @@ abstract class BaseListStatelessWidget<T, B extends BaseListBloc<T>>
   Widget builderItem(BuildContext context, T item);
 
 
-  bool enablePullUp() {
-    return true;
+  bool enablePullUp(BuildContext context) {
+    BaseListBloc bloc = BlocProvider.of<B>(context);
+
+    return !bloc.noMore;
   }
 
   @override

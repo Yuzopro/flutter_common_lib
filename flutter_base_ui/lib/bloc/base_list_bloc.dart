@@ -6,13 +6,13 @@ abstract class BaseListBloc<T> extends BaseBloc<LoadingBean<List<T>>> {
     bean = new LoadingBean(isLoading: false, data: []);
   }
 
-  void onRefresh() async {
+  onRefresh() async {
     page = 1;
-    super.onRefresh();
+    await super.onRefresh();
   }
 
-  void onLoadMore() async {
+  onLoadMore() async {
     page++;
-    super.onLoadMore();
+    await super.onLoadMore();
   }
 }
