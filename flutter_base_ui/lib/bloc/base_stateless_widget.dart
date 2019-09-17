@@ -63,7 +63,7 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
   @override
   Widget build(BuildContext context) {
     B bloc = BlocProvider.of<B>(context);
-    bloc.initData(context);
+    bloc.firstInit(context);
 
     return Scaffold(
       appBar: isShowAppBar()
@@ -117,7 +117,6 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
   }
 
   Object _getHeroTag() {
-    LogUtil.v("_getHeroTag is " + this.toString());
     return this;
   }
 

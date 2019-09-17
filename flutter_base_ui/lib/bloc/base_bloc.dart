@@ -6,6 +6,8 @@ import 'package:rxdart/rxdart.dart';
 abstract class BaseBloc<T extends LoadingBean> {
   static final String TAG = "BaseBloc";
 
+  bool _isInit = false;
+
   int page = 1;
 
   bool noMore = true;
@@ -24,12 +26,25 @@ abstract class BaseBloc<T extends LoadingBean> {
 
   void onReload();
 
+  void firstInit(BuildContext context) async {
+    if (_isInit) {
+      return;
+    }
+    _isInit = true;
+
+    initData(context);
+  }
+
   onRefresh() async {
     await getData();
+
+    notifyDataChanged();
   }
 
   onLoadMore() async {
     await getData();
+
+    notifyDataChanged();
   }
 
   void dispose() {
@@ -39,11 +54,15 @@ abstract class BaseBloc<T extends LoadingBean> {
 
   void showLoading() {
     bean.isLoading = true;
-    sink.add(bean);
+    notifyDataChanged();
   }
 
   void hideLoading() {
     bean.isLoading = false;
+    notifyDataChanged();
+  }
+
+  void notifyDataChanged() {
     sink.add(bean);
   }
 }
