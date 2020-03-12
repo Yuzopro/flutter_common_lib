@@ -4,9 +4,9 @@ import 'package:flutter_base_ui/bloc/bloc_provider.dart';
 import 'package:flutter_base_ui/bloc/loading_bean.dart';
 import 'package:flutter_base_ui/bloc/refresh_pull_list.dart';
 import 'package:flutter_base_ui/style/common_style.dart';
-import 'package:flutter_common_util/flutter_common_util.dart';
-import 'package:open_git/util/common_util.dart';
+import 'package:flutter_base_ui/util/common_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:flutter_common_util/flutter_common_util.dart';
 
 abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
     extends StatelessWidget {

@@ -5,7 +5,6 @@ import 'package:flutter_base_ui/mvp/base_presenter.dart';
 import 'package:flutter_base_ui/mvp/base_state.dart';
 import 'package:flutter_base_ui/mvp/i_base_pull_list_view.dart';
 import 'package:flutter_common_util/flutter_common_util.dart';
-import 'package:open_git/common/config.dart';
 
 abstract class PullRefreshListState<R extends StatefulWidget, T,
         P extends BasePresenter<V>, V extends IBasePullListView>
@@ -103,7 +102,8 @@ abstract class PullRefreshListState<R extends StatefulWidget, T,
     int size = 0;
     if (list != null && list.length > 0) {
       size = list.length;
-      if (size < Config.PAGE_SIZE) {
+      //  Config.dart static const int PAGE_SIZE = 20;
+      if (size < 20) {
         isNoMore = true;
       } else {
         isNoMore = false;

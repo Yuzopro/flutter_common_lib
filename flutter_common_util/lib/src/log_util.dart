@@ -8,7 +8,7 @@ class LogUtil {
   static const String _TAG_DEF = "Yuzo";
 
   //是否是debug模式
-  static bool debuggable = false;
+  static bool debuggable = true;
   static String TAG = _TAG_DEF;
 
   static void init({bool isDebug = false, String tag = _TAG_DEF}) {

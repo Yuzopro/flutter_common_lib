@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_ui/flutter_base_ui.dart';
+import 'package:flutter_base_ui/util/common_util.dart';
 import 'package:flutter_common_util/flutter_common_util.dart';
-import 'package:open_git/util/common_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 typedef IndexedOffsetBuilder = double Function(
