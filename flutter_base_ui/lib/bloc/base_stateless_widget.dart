@@ -4,9 +4,8 @@ import 'package:flutter_base_ui/bloc/bloc_provider.dart';
 import 'package:flutter_base_ui/bloc/loading_bean.dart';
 import 'package:flutter_base_ui/bloc/refresh_pull_list.dart';
 import 'package:flutter_base_ui/style/common_style.dart';
-import 'package:flutter_base_ui/util/common_util.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_common_util/flutter_common_util.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
     extends StatelessWidget {
@@ -65,13 +64,7 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
     B bloc = BlocProvider.of<B>(context);
     bloc.firstInit(context);
 
-    return Scaffold(
-      appBar: isShowAppBar()
-          ? CommonUtil.getAppBar(getTitle(context),
-              actions: getAction(context))
-          : null,
-      body: _buildBody(context, bloc),
-    );
+    return _buildBody(context, bloc);
   }
 
   Widget _buildBody(BuildContext context, B bloc) {
@@ -79,10 +72,6 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
         stream: bloc.stream,
         initialData: initialData(),
         builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
-//          LogUtil.v(
-//              'type is ${getPageType().toString()}@isLoading is ' +
-//                  isLoading(snapshot.data).toString(),
-//              tag: TAG);
           return RefreshPullList(
             isLoading: isLoading(snapshot.data),
             isError: snapshot.data != null ? snapshot.data.isError : false,
@@ -112,6 +101,9 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
             child: getChild(context, snapshot.data),
             heroTag: _getHeroTag(),
             isShowEmpty: isShowEmpty(snapshot.data),
+            isShowTitle: isShowAppBar(),
+            title: getTitle(context),
+            actions: getAction(context),
           );
         });
   }

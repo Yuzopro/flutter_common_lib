@@ -7,11 +7,11 @@ class ImageUtil {
   static Widget getCircleNetworkImage(
       String url, double size, String defaultName) {
     return ClipOval(
-      child: getNetworkImage(url, size, defaultName),
+      child: getNetworkImageBySize(url, size, defaultName),
     );
   }
 
-  static Widget getNetworkImage(String url, double size, String defaultName) {
+  static Widget getNetworkImageBySize(String url, double size, String defaultName) {
     return CachedNetworkImage(
       imageUrl: url ?? "",
       placeholder: (context, url) {
@@ -22,6 +22,13 @@ class ImageUtil {
       },
       width: size,
       height: size,
+      fit: BoxFit.cover,
+    );
+  }
+
+  static Widget getNetworkImage(String url) {
+    return CachedNetworkImage(
+      imageUrl: url ?? "",
       fit: BoxFit.cover,
     );
   }

@@ -21,9 +21,7 @@ class LogUtil {
   }
 
   static void v(Object object, {String tag}) {
-    if (debuggable) {
-      _printLog(tag, '  v  ', object);
-    }
+    _printLog(tag, '  v  ', object);
   }
 
   static void _printLog(String tag, String stag, Object object) {

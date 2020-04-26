@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_ui/bloc/loading_bean.dart';
-import 'package:flutter_base_ui/bloc/page_type.dart';
 import 'package:rxdart/rxdart.dart';
 
 abstract class BaseBloc<T extends LoadingBean> {

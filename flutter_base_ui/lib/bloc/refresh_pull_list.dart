@@ -25,7 +25,10 @@ class RefreshPullList extends StatefulWidget {
       this.offsetBuilder,
       this.heroTag,
       this.isShowEmpty,
-      this.onReload})
+      this.onReload,
+      this.isShowTitle,
+      this.title,
+      this.actions})
       : super(key: key);
 
   final bool isLoading;
@@ -43,6 +46,9 @@ class RefreshPullList extends StatefulWidget {
   final Function onReload;
   final Object heroTag;
   final bool isShowEmpty;
+  final bool isShowTitle;
+  final String title;
+  final List<Widget> actions;
 
   @override
   State<StatefulWidget> createState() {
@@ -83,20 +89,37 @@ class RefreshPullListState extends State<RefreshPullList>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Scaffold(
-      body: Stack(
+    //todo 后续优化
+    if (widget.isShowTitle) {
+      return Scaffold(
+        appBar: widget.isShowTitle
+            ? CommonUtil.getAppBar(widget.title, actions: widget.actions)
+            : null,
+        body: Stack(
+          children: <Widget>[
+            _buildPullList(),
+            _buildLoading(),
+            _buildEmptyView(),
+            _buildErrorView(),
+            _buildSideBar(context),
+            _buildLetterTips(),
+          ],
+        ),
+        floatingActionButton:
+            widget.floatingActionButton ?? buildFloatingActionButton(),
+      );
+    } else {
+      return Stack(
         children: <Widget>[
-          _buildPullList(),
+          _RefreshListView(widget),
           _buildLoading(),
           _buildEmptyView(),
           _buildErrorView(),
           _buildSideBar(context),
           _buildLetterTips(),
         ],
-      ),
-      floatingActionButton:
-          widget.floatingActionButton ?? buildFloatingActionButton(),
-    );
+      );
+    }
   }
 
   @override
@@ -172,7 +195,10 @@ class RefreshPullListState extends State<RefreshPullList>
 
   Widget _buildEmptyView() {
     return Offstage(
-      offstage: widget.itemCount != 0 || widget.isLoading || widget.isError || !widget.isShowEmpty,
+      offstage: widget.itemCount != 0 ||
+          widget.isLoading ||
+          widget.isError ||
+          !widget.isShowEmpty,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -256,4 +282,66 @@ class RefreshPullListState extends State<RefreshPullList>
       ),
     );
   }
+}
+
+class _RefreshListView extends StatefulWidget {
+  RefreshPullList widget;
+
+  _RefreshListView(RefreshPullList widget) {
+    this.widget = widget;
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    return _RefreshListViewState();
+  }
+}
+
+class _RefreshListViewState extends State<_RefreshListView> {
+  @override
+  Widget build(BuildContext context) {
+    int itemCount = widget.widget.header == null
+        ? widget.widget.itemCount
+        : widget.widget.itemCount + 1;
+
+    return _buildPullList();
+  }
+
+  Widget _buildPullList() {
+    int itemCount =
+    widget.widget.header == null ? widget.widget.itemCount : widget.widget.itemCount + 1;
+
+    return SmartRefresher(
+      controller: widget.widget.controller,
+      header: MaterialClassicHeader(
+        color: Colors.black,
+      ),
+      footer: ClassicFooter(
+        loadingIcon: const SizedBox(
+          width: 25.0,
+          height: 25.0,
+          child: const CircularProgressIndicator(
+            strokeWidth: 2.0,
+            valueColor: AlwaysStoppedAnimation(Colors.black),
+          ),
+        ),
+      ),
+      enablePullDown: widget.widget.enablePullDown,
+      enablePullUp: widget.widget.enablePullUp,
+      onRefresh: widget.widget.onRefresh,
+      onLoading: widget.widget.onLoadMore,
+      child: widget.widget.child ??
+          ListView.builder(
+            itemCount: itemCount,
+            itemBuilder: (BuildContext context, int index) {
+              if (widget.widget.header != null && index == 0) {
+                return widget.widget.header;
+              }
+              return widget.widget.itemBuilder(
+                  context, widget.widget.header == null ? index : index - 1);
+            },
+          ),
+    );
+  }
+
 }
