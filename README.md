@@ -1,5 +1,7 @@
 # OpenGit_Flutter项目常用公共库
 
+version : 1.1.0
+
 OpenGit公共库目前包含三部分
 
 * 基本UI库（flutter_base_ui）；

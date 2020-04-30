@@ -49,7 +49,7 @@ class DateUtil {
     try {
       DateTime now = DateTime.now();
 
-//      date = date.toLocal();
+      date = date.toLocal();
 
       if (now.year == date.year) {
         //当年

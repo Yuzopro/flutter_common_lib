@@ -28,7 +28,8 @@ class RefreshPullList extends StatefulWidget {
       this.onReload,
       this.isShowTitle,
       this.title,
-      this.actions})
+      this.actions,
+      this.isNeedScaffold})
       : super(key: key);
 
   final bool isLoading;
@@ -49,6 +50,7 @@ class RefreshPullList extends StatefulWidget {
   final bool isShowTitle;
   final String title;
   final List<Widget> actions;
+  final bool isNeedScaffold;
 
   @override
   State<StatefulWidget> createState() {
@@ -90,7 +92,7 @@ class RefreshPullListState extends State<RefreshPullList>
     super.build(context);
 
     //todo 后续优化
-    if (widget.isShowTitle) {
+    if (widget.isNeedScaffold) {
       return Scaffold(
         appBar: widget.isShowTitle
             ? CommonUtil.getAppBar(widget.title, actions: widget.actions)

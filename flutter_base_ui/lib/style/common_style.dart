@@ -18,6 +18,8 @@ class YZColors {
   static const int textColorWhite = white;
 
   static const int redPointColor = 0xFFED5E4B;
+
+  static const Color divider = Color(0xffe5e5e5);
 }
 
 class YZStyle {

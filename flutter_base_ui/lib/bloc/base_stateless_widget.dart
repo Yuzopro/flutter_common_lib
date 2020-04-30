@@ -15,7 +15,7 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
 
   String getTitle(BuildContext context) => '';
 
-  bool isShowAppBar() => true;
+  bool isShowAppBar(BuildContext context) => true;
 
   bool enablePullUp(BuildContext context) => false;
 
@@ -38,6 +38,8 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
   bool isShowSideBar() => false;
 
   bool isShowAppBarActions() => false;
+
+  bool isNeedScaffold() => true;
 
   double getOffset(BuildContext context, String letter) => 0;
 
@@ -101,9 +103,10 @@ abstract class BaseStatelessWidget<T extends LoadingBean, B extends BaseBloc<T>>
             child: getChild(context, snapshot.data),
             heroTag: _getHeroTag(),
             isShowEmpty: isShowEmpty(snapshot.data),
-            isShowTitle: isShowAppBar(),
+            isShowTitle: isShowAppBar(context),
             title: getTitle(context),
             actions: getAction(context),
+            isNeedScaffold: isNeedScaffold(),
           );
         });
   }
