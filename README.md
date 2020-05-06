@@ -538,11 +538,11 @@ InstallApkPlugin.installApk(path);
 ```
 
 ## Android版安装包：
-[点击下载](https://github.com/Yuzopro/opengit_flutter/releases/download/1.3.0/opengit-release-1.3.0)
+[点击下载](https://github.com/Yuzopro/opengit_flutter/releases/download/1.5.0/opengit-release-1.5.0)
 
 扫码下载
 
-![](https://raw.githubusercontent.com/Yuzopro/image/master/flutter/flutter_opengit_3.png)
+![](https://user-gold-cdn.xitu.io/2020/4/30/171c8ab2086d31f9?w=300&h=300&f=png&s=5393)
 
 ## Thanks For
 
