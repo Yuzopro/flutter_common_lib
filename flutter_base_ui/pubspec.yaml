@@ -9,17 +9,17 @@ environment:
 
 dependencies:
   # 异步处理（flutter_base_ui）
-  rxdart: ^0.22.0
+  rxdart: any
   # 下拉加载（flutter_base_ui）
-  pull_to_refresh: ^1.5.5
+  pull_to_refresh: any
   # 浏览器（flutter_base_ui）
-  webview_flutter: ^0.3.7+1
+  webview_flutter: any
   # 图片浏览（flutter_base_ui）
-  photo_view: ^0.4.0
+  photo_view: any
   # 打开系统浏览器（flutter_base_ui）
-  url_launcher: ^5.0.3
+  url_launcher: any
   # loading状态
-  flutter_spinkit: ^3.1.0
+  flutter_spinkit: any
   flutter:
     sdk: flutter
 

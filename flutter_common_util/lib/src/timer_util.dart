@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:rxdart/rxdart.dart';
-
 typedef void OnTimerCallback(int value);
 
 class TimerUtil {
@@ -11,7 +9,7 @@ class TimerUtil {
     callback(count);
 
     _subscription =
-        Observable.periodic(Duration(seconds: 1), (i) => i).take(count).listen(
+        Stream.periodic(Duration(seconds: 1), (i) => i).take(count).listen(
       (value) {
         callback(count - value - 1);
       },
@@ -23,8 +21,8 @@ class TimerUtil {
   }
 
   static delay(int milliseconds, OnTimerCallback callback) {
-    Observable.just(1).delay(Duration(milliseconds: milliseconds)).listen((_) {
-      callback(_);
+    Future.delayed(Duration(milliseconds: milliseconds), () {
+      callback(milliseconds);
     });
   }
 }

@@ -25,7 +25,7 @@ class PhotoViewPage extends StatelessWidget {
         color: Colors.black,
         child: PhotoView(
           imageProvider: NetworkImage(url),
-          loadingChild: Container(
+          loadFailedChild: Container(
             child: Stack(
               children: <Widget>[
                 Center(child: ImageUtil.getImage(defaultImg, 180.0, 180.0)),

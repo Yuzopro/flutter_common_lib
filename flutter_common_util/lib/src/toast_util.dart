@@ -7,15 +7,15 @@ class ToastUtil {
   static void showMessgae(String message) {
     ToastBuilder builder = ToastBuilder();
     builder.msg(message);
-    showBuilder(builder);
+    _showBuilder(builder);
   }
 
-  static void showBuilder(ToastBuilder builder) {
+  static void _showBuilder(ToastBuilder builder) {
     Fluttertoast.showToast(
         msg: builder.getMsg(),
         toastLength: builder.getToastLength(),
         gravity: builder.getGravity(),
-        timeInSecForIos: builder.getTimeInSecForIos(),
+        timeInSecForIosWeb: builder.getTimeInSecForIos(),
         backgroundColor: builder.getBackgroundColor(),
         textColor: builder.getTextColor(),
         fontSize: builder.getFontSize());

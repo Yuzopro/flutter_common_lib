@@ -9,15 +9,15 @@ environment:
 
 dependencies:
   # toast提示
-  fluttertoast: ^3.1.0
+  fluttertoast: any
   # 网络图片缓存
-  cached_network_image: ^2.0.0
+  cached_network_image: any
   # 分享
-  share: ^0.6.2+1
+  share: any
   # 异步处理
-  rxdart: ^0.22.0
+  rxdart: any
   #cache
-  shared_preferences: ^0.5.7
+  shared_preferences: any
   flutter:
     sdk: flutter
 

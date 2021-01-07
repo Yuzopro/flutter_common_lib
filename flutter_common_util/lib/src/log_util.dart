@@ -1,9 +1,3 @@
-/**
- * @Author: Sky24n
- * @GitHub: https://github.com/Sky24n
- * @Description: Widget Util.
- * @Date: 2018/9/29
- */
 class LogUtil {
   static const String _TAG_DEF = "Yuzo";
 
